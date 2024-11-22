@@ -1,0 +1,42 @@
+<%- include('partials/header.ejs') %>
+
+    <h1 class="text-center fw-bold text-body-emphasis">Blog</h1>
+   <% if (locals.newP) { %>
+    <% newP.forEach(function(newPo, index) { %>
+             <div class="container my-5">
+             <div class="position-relative p-5 text-center text-muted bg-body border border-dashed rounded-5">
+              <form action="/delete" method="POST">
+                <input type="hidden" name="index" value="<%= index %>">
+
+              <button type="submit" class="position-absolute top-0 end-0 p-3 m-3 btn-close bg-secondary bg-opacity-10 rounded-pill" aria-label="Close"></button>
+            </form> 
+
+              <h1 class="text-body-emphasis"><%= newPo.postTitle %></h1>
+               <h2>By: <%= newPo.postName %></h2>
+               <p class="col-lg-6 mx-auto mb-4">
+                 <%= newPo.postText %>
+               </p>
+             </div>
+            </div>
+           </div>
+          <% } )%>
+         <% } %>
+
+    <div class="px-4 py-5 my-5 text-center">
+        <h3 class="display-5 my-3">Make a new post</h3>
+        <form action="/submit" method="post">
+            <div class="mb-3 col-lg-6 mx-auto">
+                <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+              </div>
+              <div class="mb-3 col-lg-6 mx-auto">
+                <textarea class="form-control" id="text" name="text" placeholder="Enter your text here" rows="20"></textarea>
+              </div>
+            <div class="mb-3 col-lg-6 mx-auto">
+              <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+            </div>
+            <div class="mb-3 col-lg-6 mx-auto">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+      </div>
+    <%- include('partials/footer.ejs') %>
